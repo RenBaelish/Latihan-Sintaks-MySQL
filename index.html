@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan Sintaks MySQL</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="screen">
+      <div class="card">
+        <!-- Tambahkan tombol toggle dark mode di setiap header card -->
+        <!-- Di welcome screen header -->
+        <div class="card-header">
+          <div class="header-content">
+            <h1>Latihan Sintaks MySQL</h1>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sun-icon">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon-icon">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="card-content">
+          <h2>Uji pengetahuan MySQL Anda dengan 20 pertanyaan pilihan ganda</h2>
+          <p>Quiz ini mencakup perintah dasar MySQL, sintaks query, dan konsep database. Setiap pertanyaan memiliki batas waktu 30 detik dan penjelasan lengkap.</p>
+          <div class="button-container">
+            <button id="start-learning-btn" class="btn btn-primary">Belajar Dulu</button>
+            <button id="start-quiz-btn" class="btn btn-outline">Langsung Mulai Quiz</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Learning Screen -->
+    <div id="learning-screen" class="screen hidden">
+      <div class="card">
+        <!-- Di learning screen header -->
+        <div class="card-header">
+          <div class="header-content">
+            <h2>Materi Pembelajaran MySQL</h2>
+            <button id="theme-toggle-learning" class="theme-toggle" aria-label="Toggle dark mode">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sun-icon">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon-icon">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="progress-container">
+            <div id="learning-progress" class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="learning-navigation">
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="intro">Pengenalan</button>
+              <button class="tab-btn" data-tab="basic">Perintah Dasar</button>
+              <button class="tab-btn" data-tab="tables">Tabel</button>
+              <button class="tab-btn" data-tab="query">Query</button>
+              <button class="tab-btn" data-tab="advanced">Lanjutan</button>
+            </div>
+          </div>
+
+          <div class="learning-content">
+            <!-- Pengenalan -->
+            <div id="intro" class="tab-content active">
+              <h3>Pengenalan MySQL</h3>
+              <p>MySQL adalah sistem manajemen database relasional (RDBMS) open-source yang paling populer di dunia. MySQL menggunakan SQL (Structured Query Language) untuk mengakses dan memproses data dalam database.</p>
+
+              <div class="info-box">
+                <h4>Apa itu MySQL?</h4>
+                <p>MySQL adalah database server yang:</p>
+                <ul>
+                  <li>Cepat, handal, dan mudah digunakan</li>
+                  <li>Bekerja dengan arsitektur client/server</li>
+                  <li>Kompatibel dengan berbagai bahasa pemrograman</li>
+                  <li>Mendukung SQL standar</li>
+                </ul>
+              </div>
+
+              <div class="code-example">
+                <h4>Cara Masuk ke MySQL</h4>
+                <div class="code-container">
+                  <code>mysql -u root -p</code>
+                </div>
+                <p>Perintah di atas digunakan untuk masuk ke MySQL dengan username "root". Parameter -p akan meminta password.</p>
+              </div>
+
+              <div class="navigation-buttons">
+                <button class="btn btn-outline disabled">Sebelumnya</button>
+                <button class="btn btn-primary next-tab" data-next="basic">Selanjutnya</button>
+              </div>
+            </div>
+
+            <!-- Perintah Dasar -->
+            <div id="basic" class="tab-content">
+              <h3>Perintah Dasar MySQL</h3>
+              <p>Berikut adalah perintah-perintah dasar yang sering digunakan dalam MySQL untuk mengelola database.</p>
+
+              <div class="info-box">
+                <h4>Mengelola Database</h4>
+                <table class="command-table">
+                  <tr>
+                    <th>Perintah</th>
+                    <th>Fungsi</th>
+                  </tr>
+                  <tr>
+                    <td><code>SHOW DATABASES;</code></td>
+                    <td>Menampilkan semua database yang tersedia</td>
+                  </tr>
+                  <tr>
+                    <td><code>CREATE DATABASE nama_db;</code></td>
+                    <td>Membuat database baru</td>
+                  </tr>
+                  <tr>
+                    <td><code>USE nama_db;</code></td>
+                    <td>Menggunakan/memilih database tertentu</td>
+                  </tr>
+                  <tr>
+                    <td><code>DROP DATABASE nama_db;</code></td>
+                    <td>Menghapus database</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="code-example">
+                <h4>Contoh Penggunaan</h4>
+                <div class="code-container">
+                  <code>CREATE DATABASE toko;<br>
+USE toko;<br>
+SHOW DATABASES;</code>
+                </div>
+                <p>Perintah di atas akan membuat database baru bernama "toko", kemudian menggunakannya, dan menampilkan daftar semua database.</p>
+              </div>
+
+              <div class="navigation-buttons">
+                <button class="btn btn-outline prev-tab" data-prev="intro">Sebelumnya</button>
+                <button class="btn btn-primary next-tab" data-next="tables">Selanjutnya</button>
+              </div>
+            </div>
+
+            <!-- Tabel -->
+            <div id="tables" class="tab-content">
+              <h3>Mengelola Tabel di MySQL</h3>
+              <p>Tabel adalah struktur dasar penyimpanan data dalam database relasional. Berikut cara membuat dan mengelola tabel.</p>
+
+              <div class="info-box">
+                <h4>Perintah Tabel</h4>
+                <table class="command-table">
+                  <tr>
+                    <th>Perintah</th>
+                    <th>Fungsi</th>
+                  </tr>
+                  <tr>
+                    <td><code>SHOW TABLES;</code></td>
+                    <td>Menampilkan semua tabel dalam database</td>
+                  </tr>
+                  <tr>
+                    <td><code>CREATE TABLE nama_tabel (...);</code></td>
+                    <td>Membuat tabel baru</td>
+                  </tr>
+                  <tr>
+                    <td><code>DESCRIBE nama_tabel;</code></td>
+                    <td>Menampilkan struktur tabel</td>
+                  </tr>
+                  <tr>
+                    <td><code>ALTER TABLE nama_tabel ...</code></td>
+                    <td>Mengubah struktur tabel</td>
+                  </tr>
+                  <tr>
+                    <td><code>DROP TABLE nama_tabel;</code></td>
+                    <td>Menghapus tabel</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="code-example">
+                <h4>Contoh Membuat Tabel</h4>
+                <div class="code-container">
+                  <code>CREATE TABLE produk (
+  id INT NOT NULL AUTO_INCREMENT,
+  nama VARCHAR(100) NOT NULL,
+  harga DECIMAL(10,2) NOT NULL,
+  stok INT DEFAULT 0,
+  kategori_id INT,
+  PRIMARY KEY (id)
+);</code>
+                </div>
+                <p>Perintah di atas membuat tabel "produk" dengan kolom id, nama, harga, stok, dan kategori_id. Kolom id ditetapkan sebagai primary key yang auto-increment.</p>
+              </div>
+
+              <div class="code-example">
+                <h4>Contoh Mengubah Tabel</h4>
+                <div class="code-container">
+                  <code>ALTER TABLE produk ADD deskripsi TEXT;</code>
+                </div>
+                <p>Perintah di atas menambahkan kolom baru bernama "deskripsi" dengan tipe data TEXT ke tabel produk.</p>
+              </div>
+
+              <div class="navigation-buttons">
+                <button class="btn btn-outline prev-tab" data-prev="basic">Sebelumnya</button>
+                <button class="btn btn-primary next-tab" data-next="query">Selanjutnya</button>
+              </div>
+            </div>
+
+            <!-- Query -->
+            <div id="query" class="tab-content">
+              <h3>Query Data di MySQL</h3>
+              <p>Query digunakan untuk mengambil, menambah, mengubah, dan menghapus data dalam tabel.</p>
+
+              <div class="info-box">
+                <h4>Perintah Dasar Query</h4>
+                <table class="command-table">
+                  <tr>
+                    <th>Perintah</th>
+                    <th>Fungsi</th>
+                  </tr>
+                  <tr>
+                    <td><code>SELECT</code></td>
+                    <td>Mengambil data dari tabel</td>
+                  </tr>
+                  <tr>
+                    <td><code>INSERT INTO</code></td>
+                    <td>Menambahkan data baru ke tabel</td>
+                  </tr>
+                  <tr>
+                    <td><code>UPDATE</code></td>
+                    <td>Mengubah data yang sudah ada</td>
+                  </tr>
+                  <tr>
+                    <td><code>DELETE FROM</code></td>
+                    <td>Menghapus data dari tabel</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="code-example">
+                <h4>Contoh SELECT</h4>
+                <div class="code-container">
+                  <code>SELECT * FROM produk;<br>
+SELECT nama, harga FROM produk WHERE harga > 1000;<br>
+SELECT * FROM produk ORDER BY harga DESC;<br>
+SELECT * FROM produk LIMIT 5;</code>
+                </div>
+                <p>Perintah di atas menunjukkan berbagai cara mengambil data: semua data, kolom tertentu dengan kondisi, pengurutan, dan pembatasan jumlah hasil.</p>
+              </div>
+
+              <div class="code-example">
+                <h4>Contoh INSERT, UPDATE, DELETE</h4>
+                <div class="code-container">
+                  <code>INSERT INTO produk (nama, harga, stok) VALUES ('Laptop', 5000000, 10);<br><br>
+UPDATE produk SET harga = 4500000 WHERE id = 1;<br><br>
+DELETE FROM produk WHERE id = 1;</code>
+                </div>
+                <p>Perintah di atas menunjukkan cara menambah, mengubah, dan menghapus data dalam tabel produk.</p>
+              </div>
+
+              <div class="navigation-buttons">
+                <button class="btn btn-outline prev-tab" data-prev="tables">Sebelumnya</button>
+                <button class="btn btn-primary next-tab" data-next="advanced">Selanjutnya</button>
+              </div>
+            </div>
+
+            <!-- Lanjutan -->
+            <div id="advanced" class="tab-content">
+              <h3>Fitur Lanjutan MySQL</h3>
+              <p>MySQL memiliki banyak fitur lanjutan untuk query yang lebih kompleks dan efisien.</p>
+
+              <div class="info-box">
+                <h4>JOIN</h4>
+                <p>JOIN digunakan untuk menggabungkan data dari dua tabel atau lebih berdasarkan kolom yang berhubungan.</p>
+                <div class="code-container">
+                  <code>SELECT p.nama, k.nama AS kategori
+FROM produk p
+JOIN kategori k ON p.kategori_id = k.id;</code>
+                </div>
+              </div>
+
+              <div class="info-box">
+                <h4>Fungsi Agregat</h4>
+                <p>Fungsi agregat melakukan perhitungan pada sekelompok nilai dan mengembalikan nilai tunggal.</p>
+                <table class="command-table">
+                  <tr>
+                    <th>Fungsi</th>
+                    <th>Deskripsi</th>
+                  </tr>
+                  <tr>
+                    <td><code>COUNT()</code></td>
+                    <td>Menghitung jumlah baris</td>
+                  </tr>
+                  <tr>
+                    <td><code>SUM()</code></td>
+                    <td>Menjumlahkan nilai</td>
+                  </tr>
+                  <tr>
+                    <td><code>AVG()</code></td>
+                    <td>Menghitung rata-rata</td>
+                  </tr>
+                  <tr>
+                    <td><code>MIN()</code></td>
+                    <td>Mencari nilai minimum</td>
+                  </tr>
+                  <tr>
+                    <td><code>MAX()</code></td>
+                    <td>Mencari nilai maksimum</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="code-example">
+                <h4>Contoh GROUP BY</h4>
+                <div class="code-container">
+                  <code>SELECT kategori_id, COUNT(*) as jumlah, AVG(harga) as rata_harga
+FROM produk
+GROUP BY kategori_id;</code>
+                </div>
+                <p>Query di atas menghitung jumlah produk dan rata-rata harga untuk setiap kategori.</p>
+              </div>
+
+              <div class="navigation-buttons">
+                <button class="btn btn-outline prev-tab" data-prev="query">Sebelumnya</button>
+                <button id="finish-learning-btn" class="btn btn-primary">Mulai Quiz</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quiz-screen" class="screen hidden">
+      <div class="card">
+        <!-- Di quiz screen header -->
+        <div class="card-header">
+          <div class="header-content">
+            <div class="quiz-header">
+              <h2 id="question-counter">Pertanyaan 1 dari 20</h2>
+              <div class="timer"><span id="time-left">30</span>s</div>
+            </div>
+            <button id="theme-toggle-quiz" class="theme-toggle" aria-label="Toggle dark mode">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sun-icon">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon-icon">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="progress-container">
+            <div id="question-progress" class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+            <div id="time-progress" class="progress-bar time-bar">
+              <div class="progress-fill"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <div id="question-container">
+            <h3 id="question-text"></h3>
+            <div id="code-container" class="code-container hidden">
+              <code id="question-code"></code>
+            </div>
+            <div id="options-container" class="options-container"></div>
+          </div>
+
+          <div id="explanation-container" class="explanation-container hidden">
+            <div class="explanation-header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              <h4>Penjelasan:</h4>
+            </div>
+            <p id="explanation-text"></p>
+          </div>
+
+          <div class="button-container">
+            <button id="show-explanation-btn" class="btn btn-outline hidden">Lihat Penjelasan</button>
+            <button id="next-question-btn" class="btn btn-primary" disabled>Pertanyaan Berikutnya</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="results-screen" class="screen hidden">
+      <div class="card">
+        <!-- Di results screen header -->
+        <div class="card-header">
+          <div class="header-content">
+            <h2>Hasil Quiz MySQL</h2>
+            <button id="theme-toggle-results" class="theme-toggle" aria-label="Toggle dark mode">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sun-icon">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon-icon">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="results-summary">
+            <div class="score-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <path d="M12 8c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5z"></path>
+                <path d="M12 3v1"></path>
+                <path d="M12 20v1"></path>
+                <path d="M3 12h1"></path>
+                <path d="M20 12h1"></path>
+                <path d="M18.7 5.3l-.7.7"></path>
+                <path d="M6 6l-.7-.7"></path>
+                <path d="M18.7 18.7l-.7-.7"></path>
+                <path d="M6 18l-.7.7"></path>
+              </svg>
+            </div>
+            <h2 id="score-display">0 / 20</h2>
+            <div class="score-progress">
+              <div id="score-bar" class="progress-bar">
+                <div class="progress-fill"></div>
+              </div>
+            </div>
+            <p id="score-feedback"></p>
+          </div>
+
+          <div class="answers-summary">
+            <h3>Ringkasan Jawaban</h3>
+            <div id="answers-container" class="answers-container"></div>
+          </div>
+
+          <div class="button-container">
+            <button id="restart-quiz-btn" class="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+              </svg>
+              Mulai Ulang Quiz
+            </button>
+            <button id="back-to-learning-btn" class="btn btn-outline">
+              Kembali ke Materi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="confetti-container"></div>
+
+  <!-- Semua kode dalam satu file untuk menghindari masalah loading -->
+  <script>
+    // Data pertanyaan
+    const questions = [
+      {
+        text: "Perintah untuk masuk ke MySQL lewat Command Prompt adalah?",
+        options: [
+          { value: "a", text: "mysql -user root" },
+          { value: "b", text: "connect mysql root" },
+          { value: "c", text: "mysql -u root -p" },
+          { value: "d", text: "login mysql" },
+        ],
+        correctAnswer: "c",
+        explanation:
+          "Untuk masuk ke MySQL melalui Command Prompt, kita menggunakan perintah 'mysql -u root -p'. Parameter -u menentukan username yang digunakan untuk login, dan parameter -p akan meminta password.",
+      },
+      {
+        text: "Untuk melihat semua database yang ada, perintah yang digunakan adalah?",
+        options: [
+          { value: "a", text: "SHOW DATABASE;" },
+          { value: "b", text: "LIST DATABASES;" },
+          { value: "c", text: "DISPLAY DATABASES;" },
+          { value: "d", text: "SHOW DATABASES;" },
+        ],
+        correctAnswer: "d",
+        explanation:
+          "Perintah 'SHOW DATABASES;' digunakan untuk menampilkan daftar semua database yang tersedia di server MySQL. Perhatikan bahwa kata 'DATABASES' menggunakan bentuk jamak (dengan 's' di akhir) dan diakhiri dengan titik koma.",
+      },
+      {
+        text: "Perintah untuk membuat database baru adalah?",
+        options: [
+          { value: "a", text: "CREATE DATABASE nama;" },
+          { value: "b", text: "MAKE DATABASE nama;" },
+          { value: "c", text: "INIT DATABASE nama;" },
+          { value: "d", text: "CREATE NEW nama;" },
+        ],
+        correctAnswer: "a",
+        explanation:
+          "Untuk membuat database baru di MySQL, kita menggunakan perintah 'CREATE DATABASE nama;' dimana 'nama' adalah nama database yang ingin dibuat. Perintah ini akan membuat database kosong yang siap digunakan.",
+      },
+      {
+        text: "Jika ingin menggunakan database yang telah dibuat, perintah yang digunakan adalah?",
+        options: [
+          { value: "a", text: "OPEN nama_database;" },
+          { value: "b", text: "SELECT nama_database;" },
+          { value: "c", text: "USE nama_database;" },
+          { value: "d", text: "LOAD nama_database;" },
+        ],
+        correctAnswer: "c",
+        explanation:
+          "Perintah 'USE nama_database;' digunakan untuk beralih ke database tertentu dan menggunakannya sebagai database aktif. Setelah menjalankan perintah ini, semua operasi selanjutnya akan dilakukan pada database tersebut kecuali ditentukan lain.",
+      },
+      {
+        text: "Perintah untuk menghapus database secara permanen adalah?",
+        options: [
+          { value: "a", text: "REMOVE DATABASE nama;" },
+          { value: "b", text: "DELETE DATABASE nama;" },
+          { value: "c", text: "ERASE DATABASE nama;" },
+          { value: "d", text: "DROP DATABASE nama;" },
+        ],
+        correctAnswer: "d",
+        explanation:
+          "Perintah 'DROP DATABASE nama;' digunakan untuk menghapus database secara permanen beserta semua tabel dan data di dalamnya. Hati-hati saat menggunakan perintah ini karena tidak dapat dibatalkan dan semua data akan hilang.",
+      },
+      {
+        text: "Untuk membuat tabel bernama 'satuan' dengan field satuanId dan satuanNama, perintah yang benar adalah?",
+        options: [
+          { value: "a", text: "CREATE TABLE satuan (satuanId INT, satuanNama TEXT);" },
+          {
+            value: "b",
+            text: "CREATE TABLE satuan (satuanId INT NOT NULL AUTO_INCREMENT, satuanNama VARCHAR(30) NOT NULL, PRIMARY KEY(satuanId));",
+          },
+          { value: "c", text: "CREATE TABLE satuan (satuanId PRIMARY, satuanNama);" },
+          { value: "d", text: "TABLE CREATE satuan (...);" },
+        ],
+        correctAnswer: "b",
+        explanation:
+          "Perintah yang benar adalah 'CREATE TABLE satuan (satuanId INT NOT NULL AUTO_INCREMENT, satuanNama VARCHAR(30) NOT NULL, PRIMARY KEY(satuanId));'. Perintah ini membuat tabel dengan kolom satuanId sebagai primary key yang auto-increment dan satuanNama sebagai VARCHAR dengan panjang maksimal 30 karakter yang tidak boleh kosong.",
+      },
+      {
+        text: "Untuk melihat daftar tabel di dalam database, perintah yang digunakan adalah?",
+        options: [
+          { value: "a", text: "SHOW ALL;" },
+          { value: "b", text: "SHOW TABLES;" },
+          { value: "c", text: "LIST TABLE;" },
+          { value: "d", text: "DESCRIBE TABLES;" },
+        ],
+        correctAnswer: "b",
+        explanation:
+          "Perintah 'SHOW TABLES;' digunakan untuk menampilkan daftar semua tabel yang ada dalam database yang sedang aktif. Perintah ini sangat berguna untuk melihat struktur database secara keseluruhan.",
+      },
+      {
+        text: "Untuk melihat struktur tabel 'satuan', digunakan perintah?",
+        options: [
+          { value: "a", text: "STRUCTURE satuan;" },
+          { value: "b", text: "DESCRIBE satuan;" },
+          { value: "c", text: "SHOW satuan;" },
+          { value: "d", text: "PRINT TABLE satuan;" },
+        ],
+        correctAnswer: "b",
+        explanation:
+          "Perintah 'DESCRIBE satuan;' atau singkatnya 'DESC satuan;' digunakan untuk melihat struktur tabel, termasuk nama kolom, tipe data, apakah kolom dapat bernilai NULL, key constraints, dan nilai default. Perintah ini sangat berguna untuk memahami struktur tabel.",
+      },
+      {
+        text: "Untuk menambahkan kolom 'keterangan' ke tabel satuan, digunakan perintah?",
+        options: [
+          { value: "a", text: "ALTER TABLE satuan ADD keterangan VARCHAR(25);" },
+          { value: "b", text: "ADD COLUMN keterangan TO satuan;" },
+          { value: "c", text: "TABLE satuan ALTER keterangan VARCHAR(25);" },
+          { value: "d", text: "MODIFY satuan ADD keterangan;" },
+        ],
+        correctAnswer: "a",
+        explanation:
+          "Perintah 'ALTER TABLE satuan ADD keterangan VARCHAR(25);' digunakan untuk menambahkan kolom baru bernama 'keterangan' dengan tipe data VARCHAR(25) ke tabel 'satuan'. Perintah ALTER TABLE digunakan untuk memodifikasi struktur tabel yang sudah ada.",
+      },
+      {
+        text: "Untuk mengganti nama kolom 'keterangan' menjadi 'ket' dan tetap dengan tipe varchar(20)?",
+        options: [
+          { value: "a", text: "ALTER TABLE satuan RENAME keterangan TO ket;" },
+          { value: "b", text: "ALTER TABLE satuan CHANGE COLUMN keterangan ket VARCHAR(20);" },
+          { value: "c", text: "MODIFY COLUMN keterangan AS ket;" },
+          { value: "d", text: "RENAME satuan keterangan ket;" },
+        ],
+        correctAnswer: "b",
+        explanation:
+          "Perintah 'ALTER TABLE satuan CHANGE COLUMN keterangan ket VARCHAR(20);' digunakan untuk mengganti nama kolom 'keterangan' menjadi 'ket' sekaligus menentukan tipe datanya. Perhatikan bahwa kita harus menentukan ulang tipe data kolom tersebut meskipun tidak berubah.",
+      },
+      {
+        text: "Query untuk menampilkan semua data dari tabel satuan?",
+        options: [
+          { value: "a", text: "SELECT ALL FROM satuan;" },
+          { value: "b", text: "SHOW * FROM satuan;" },
+          { value: "c", text: "SELECT * FROM satuan;" },
+          { value: "d", text: "GET ALL satuan;" },
+        ],
+        correctAnswer: "c",
+        explanation:
+          "Perintah 'SELECT * FROM satuan;' digunakan untuk menampilkan semua kolom dan semua baris data dari tabel 'satuan'. Tanda asterisk (*) adalah wildcard yang berarti 'semua kolom'.",
+      },
+      {
+        text: "Perintah SQL yang digunakan untuk mengambil data unik (tidak duplikat) dari suatu kolom adalah?",
+        options: [
+          { value: "a", text: "SELECT ONLY nama FROM pelanggan;" },
+          { value: "b", text: "SELECT DISTINCT nama FROM pelanggan;" },
+          { value: "c", text: "SELECT UNIQUE nama FROM pelanggan;" },
+          { value: "d", text: "SELECT DIFFERENT nama FROM pelanggan;" },
+        ],
+        correctAnswer: "b",
+        explanation:
+          "Perintah 'SELECT DISTINCT nama FROM pelanggan;' digunakan untuk mengambil nilai unik dari kolom 'nama' dalam tabel 'pelanggan'. Ini menghilangkan duplikasi sehingga setiap nilai hanya muncul sekali dalam hasil query.",
+      },
+      {
+        text: "Fungsi dari klausa WHERE dalam perintah SQL adalah?",
+        options: [
+          { value: "a", text: "Mengurutkan data berdasarkan kolom tertentu" },
+          { value: "b", text: "Menyaring data berdasarkan kondisi tertentu" },
+          { value: "c", text: "Menggabungkan  text: Menyaring data berdasarkan kondisi tertentu" },
+          { value: "d", text: "Menggabungkan dua tabel" },
+          { value: "e", text: "Menghapus kolom tertentu" },
+        ],
+        correctAnswer: "b",
+        explanation:
+          "Klausa WHERE dalam SQL digunakan untuk menyaring (filter) data berdasarkan kondisi tertentu. Ini memungkinkan kita untuk mengambil hanya baris-baris yang memenuhi kriteria yang ditentukan, seperti 'WHERE harga > 1000' atau 'WHERE nama = 'John'.",
+      },
+      {
+        text: "Apa hasil dari query berikut?",
+        code: "SELECT COUNT(*) FROM produk;",
+        options: [
+          { value: "a", text: "Menampilkan semua data dalam tabel produk" },
+          { value: "b", text: "Menghitung jumlah kolom dalam tabel produk" },
+          { value: "c", text: "Menghitung jumlah baris (record) dalam tabel produk" },
+          { value: "d", text: "Menampilkan data unik dalam tabel produk" },
+        ],
+        correctAnswer: "c",
+        explanation:
+          "Query 'SELECT COUNT(*) FROM produk;' menghitung jumlah total baris (record) dalam tabel 'produk'. Fungsi COUNT(*) adalah fungsi agregat yang menghitung jumlah baris yang dikembalikan oleh query.",
+      },
+      {
+        text: "Bagaimana cara mengurutkan data berdasarkan kolom 'harga' secara menurun (dari yang terbesar)?",
+        options: [
+          { value: "a", text: "SELECT * FROM produk SORT BY harga DESC;" },
+          { value: "b", text: "SELECT * FROM produk ORDER harga DESC;" },
+          { value: "c", text: "SELECT * FROM produk ORDER BY harga DESC;" },
+          { value: "d", text: "SELECT * FROM produk ARRANGE BY harga DESC;" },
+        ],
+        correctAnswer: "c",
+        explanation:
+          "Perintah 'SELECT * FROM produk ORDER BY harga DESC;' digunakan untuk menampilkan semua data dari tabel 'produk' yang diurutkan berdasarkan kolom 'harga' secara menurun (descending). Kata kunci ORDER BY digunakan untuk pengurutan dan DESC menentukan urutan menurun.",
+      },
+      {
+        text: "Untuk membatasi jumlah baris yang ditampilkan menjadi 5 baris pertama, perintah yang digunakan adalah?",
+        options: [
+          { value: "a", text: "SELECT * FROM produk LIMIT 5;" },
+          { value: "b", text: "SELECT TOP 5 * FROM produk;" },
+          { value: "c", text: "SELECT FIRST 5 * FROM produk;" },
+          { value: "d", text: "SELECT * FROM produk ROWS 5;" },
+        ],
+        correctAnswer: "a",
+        explanation:
+          "Perintah 'SELECT * FROM produk LIMIT 5;' digunakan untuk membatasi hasil query hanya menampilkan 5 baris pertama dari tabel 'produk'. Klausa LIMIT adalah cara standar di MySQL untuk membatasi jumlah baris yang dikembalikan oleh query.",
+      },
+      {
+        text: "Apa fungsi dari operator LIKE dalam SQL?",
+        options: [
+          { value: "a", text: "Untuk menggabungkan dua tabel" },
+          { value: "b", text: "Untuk melakukan operasi matematika" },
+          { value: "c", text: "Untuk mencari pola dalam string" },
+          { value: "d", text: "Untuk mengurutkan data" },
+        ],
+        correctAnswer: "c",
+        explanation:
+          "Operator LIKE dalam SQL digunakan untuk mencari pola tertentu dalam kolom string. Ini sering digunakan dengan wildcard seperti % (mewakili nol atau lebih karakter) dan _ (mewakili tepat satu karakter). Contoh: 'WHERE nama LIKE 'A%'' akan mencari semua nama yang dimulai dengan huruf A.",
+      },
+      {
+        text: "Bagaimana cara menggabungkan dua tabel 'produk' dan 'kategori' berdasarkan kolom 'kategori_id'?",
+        options: [
+          { value: "a", text: "SELECT * FROM produk, kategori WHERE produk.kategori_id = kategori.id;" },
+          { value: "b", text: "SELECT * FROM produk JOIN kategori ON produk.kategori_id = kategori.id;" },
+          { value: "c", text: "SELECT * FROM produk COMBINE kategori WHERE produk.kategori_id = kategori.id;" },
+          { value: "d", text: "SELECT * FROM produk MERGE kategori ON produk.kategori_id = kategori.id;" },
+        ],
+        correctAnswer: "b",
+        explanation:
+          "Perintah 'SELECT * FROM produk JOIN kategori ON produk.kategori_id = kategori.id;' digunakan untuk menggabungkan (join) dua tabel berdasarkan kolom yang berhubungan. Ini adalah contoh INNER JOIN yang hanya menampilkan baris yang memiliki kecocokan di kedua tabel.",
+      },
+      {
+        text: "Apa fungsi dari perintah INSERT dalam SQL?",
+        options: [
+          { value: "a", text: "Mengubah data yang sudah ada" },
+          { value: "b", text: "Menambahkan data baru ke dalam tabel" },
+          { value: "c", text: "Menghapus data dari tabel" },
+          { value: "d", text: "Membuat tabel baru" },
+        ],
+        correctAnswer: "b",
+        explanation:
+          "Perintah INSERT digunakan untuk menambahkan data baru (record/baris) ke dalam tabel. Contoh: 'INSERT INTO produk (nama, harga) VALUES ('Laptop', 5000000);' akan menambahkan produk baru dengan nama 'Laptop' dan harga 5000000 ke dalam tabel produk.",
+      },
+      {
+        text: "Bagaimana cara mengubah data yang sudah ada dalam tabel?",
+        options: [
+          { value: "a", text: "MODIFY produk SET harga = 2000000 WHERE id = 1;" },
+          { value: "b", text: "CHANGE produk SET harga = 2000000 WHERE id = 1;" },
+          { value: "c", text: "UPDATE produk SET harga = 2000000 WHERE id = 1;" },
+          { value: "d", text: "ALTER produk SET harga = 2000000 WHERE id = 1;" },
+        ],
+        correctAnswer: "c",
+        explanation:
+          "Perintah 'UPDATE produk SET harga = 2000000 WHERE id = 1;' digunakan untuk mengubah data yang sudah ada dalam tabel. Dalam contoh ini, harga produk dengan id 1 diubah menjadi 2000000. Klausa WHERE sangat penting untuk membatasi baris mana yang akan diubah.",
+      },
+    ];
+
+    // Fungsi confetti
+    function createConfetti() {
+      const confettiContainer = document.getElementById('confetti-container');
+      const colors = ['#3b82f6', '#60a5fa', '#93c5fd', '#2563eb', '#1d4ed8'];
+      const shapes = ['circle', 'square', 'triangle'];
+
+      // Create 150 confetti pieces
+      for (let i = 0; i < 150; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          const shape = shapes[Math.floor(Math.random() * shapes.length)];
+
+          confetti.style.position = 'absolute';
+          confetti.style.width = `${Math.random() * 10 + 5}px`;
+          confetti.style.height = confetti.style.width;
+          confetti.style.backgroundColor = color;
+          confetti.style.left = `${Math.random() * 100}vw`;
+          confetti.style.top = `-20px`;
+          confetti.style.opacity = Math.random() + 0.5;
+
+          if (shape === 'circle') {
+            confetti.style.borderRadius = '50%';
+          } else if (shape === 'triangle') {
+            confetti.style.width = '0';
+            confetti.style.height = '0';
+            confetti.style.backgroundColor = 'transparent';
+            confetti.style.borderLeft = `${parseInt(confetti.style.width) / 2}px solid transparent`;
+            confetti.style.borderRight = `${parseInt(confetti.style.width) / 2}px solid transparent`;
+            confetti.style.borderBottom = `${parseInt(confetti.style.width)}px solid ${color}`;
+          }
+
+          confettiContainer.appendChild(confetti);
+
+          // Animate the confetti
+          const animationDuration = Math.random() * 3 + 2;
+          const xMovement = (Math.random() - 0.5) * 15;
+
+          confetti.animate(
+            [
+              { transform: `translate(0, 0) rotate(0deg)` },
+              { transform: `translate(${xMovement}vw, 100vh) rotate(${Math.random() * 360}deg)` }
+            ],
+            {
+              duration: animationDuration * 1000,
+              easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)'
+            }
+          );
+
+          // Remove the confetti element after animation
+          setTimeout(() => {
+            confetti.remove();
+          }, animationDuration * 1000);
+        }, Math.random() * 1500);
+      }
+    }
+
+    // Logika quiz dan pembelajaran
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log("DOM fully loaded");
+
+      // Tambahkan kode untuk dark mode
+      setupDarkMode();
+
+      // DOM Elements - Welcome Screen
+      const welcomeScreen = document.getElementById('welcome-screen');
+      const startLearningBtn = document.getElementById('start-learning-btn');
+      const startQuizBtn = document.getElementById('start-quiz-btn');
+
+      // DOM Elements - Learning Screen
+      const learningScreen = document.getElementById('learning-screen');
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+      const nextTabBtns = document.querySelectorAll('.next-tab');
+      const prevTabBtns = document.querySelectorAll('.prev-tab');
+      const finishLearningBtn = document.getElementById('finish-learning-btn');
+      const learningProgress = document.querySelector('#learning-progress .progress-fill');
+
+      // DOM Elements - Quiz Screen
+      const quizScreen = document.getElementById('quiz-screen');
+      const resultsScreen = document.getElementById('results-screen');
+      const questionCounter = document.getElementById('question-counter');
+      const timeLeft = document.getElementById('time-left');
+      const questionProgress = document.getElementById('question-progress').querySelector('.progress-fill');
+      const timeProgress = document.getElementById('time-progress').querySelector('.progress-fill');
+      const questionText = document.getElementById('question-text');
+      const codeContainer = document.getElementById('code-container');
+      const questionCode = document.getElementById('question-code');
+      const optionsContainer = document.getElementById('options-container');
+      const explanationContainer = document.getElementById('explanation-container');
+      const explanationText = document.getElementById('explanation-text');
+      const showExplanationBtn = document.getElementById('show-explanation-btn');
+      const nextQuestionBtn = document.getElementById('next-question-btn');
+
+      // DOM Elements - Results Screen
+      const scoreDisplay = document.getElementById('score-display');
+      const scoreBar = document.getElementById('score-bar').querySelector('.progress-fill');
+      const scoreFeedback = document.getElementById('score-feedback');
+      const answersContainer = document.getElementById('answers-container');
+      const restartQuizBtn = document.getElementById('restart-quiz-btn');
+      const backToLearningBtn = document.getElementById('back-to-learning-btn');
+
+      // Quiz State
+      let currentQuestion = 0;
+      let selectedAnswers = {};
+      let score = 0;
+      let timer;
+      let timeRemaining = 30;
+      let timerActive = false;
+
+      // Learning State
+      let currentTab = 'intro';
+      const tabOrder = ['intro', 'basic', 'tables', 'query', 'advanced'];
+
+      // Event Listeners - Welcome Screen
+      startLearningBtn.addEventListener('click', function() {
+        welcomeScreen.classList.add('hidden');
+        learningScreen.classList.remove('hidden');
+        updateLearningProgress();
+      });
+
+      startQuizBtn.addEventListener('click', function() {
+        welcomeScreen.classList.add('hidden');
+        quizScreen.classList.remove('hidden');
+        startQuiz();
+      });
+
+      // Event Listeners - Learning Screen
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const tab = this.dataset.tab;
+          switchTab(tab);
+        });
+      });
+
+      nextTabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const nextTab = this.dataset.next;
+          switchTab(nextTab);
+        });
+      });
+
+      prevTabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const prevTab = this.dataset.prev;
+          switchTab(prevTab);
+        });
+      });
+
+      finishLearningBtn.addEventListener('click', function() {
+        learningScreen.classList.add('hidden');
+        quizScreen.classList.remove('hidden');
+        startQuiz();
+      });
+
+      // Event Listeners - Quiz Screen
+      showExplanationBtn.addEventListener('click', showExplanation);
+      nextQuestionBtn.addEventListener('click', nextQuestion);
+
+      // Event Listeners - Results Screen
+      restartQuizBtn.addEventListener('click', restartQuiz);
+      backToLearningBtn.addEventListener('click', function() {
+        resultsScreen.classList.add('hidden');
+        learningScreen.classList.remove('hidden');
+      });
+
+      // Functions - Learning
+      function switchTab(tab) {
+        // Update active tab button
+        tabBtns.forEach(btn => {
+          if (btn.dataset.tab === tab) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+
+        // Update active tab content
+        tabContents.forEach(content => {
+          if (content.id === tab) {
+            content.classList.add('active');
+          } else {
+            content.classList.remove('active');
+          }
+        });
+
+        // Update current tab
+        currentTab = tab;
+        updateLearningProgress();
+      }
+
+      function updateLearningProgress() {
+        const currentIndex = tabOrder.indexOf(currentTab);
+        const progressPercentage = ((currentIndex + 1) / tabOrder.length) * 100;
+        learningProgress.style.width = `${progressPercentage}%`;
+      }
+
+      // Functions - Quiz
+      function startQuiz() {
+        console.log("Starting quiz...");
+        loadQuestion(0);
+        startTimer();
+      }
+
+      function loadQuestion(index) {
+        console.log(`Loading question ${index}`);
+        currentQuestion = index;
+        const question = questions[index];
+
+        // Update question counter
+        questionCounter.textContent = `Pertanyaan ${index + 1} dari ${questions.length}`;
+
+        // Update progress bar
+        questionProgress.style.width = `${((index + 1) / questions.length) * 100}%`;
+
+        // Set question text
+        questionText.textContent = question.text;
+
+        // Show or hide code block
+        if (question.code) {
+          codeContainer.classList.remove('hidden');
+          questionCode.textContent = question.code;
+        } else {
+          codeContainer.classList.add('hidden');
+        }
+
+        // Clear previous options
+        optionsContainer.innerHTML = '';
+
+        // Add options
+        question.options.forEach(option => {
+          const optionElement = document.createElement('div');
+          optionElement.className = 'option';
+          optionElement.dataset.value = option.value;
+
+          if (selectedAnswers[index] === option.value) {
+            optionElement.classList.add('selected');
+          }
+
+          optionElement.innerHTML = `
+            <input type="radio" name="question${index}" class="option-radio" id="option${index}${option.value}" ${selectedAnswers[index] === option.value ? 'checked' : ''}>
+            <label for="option${index}${option.value}" class="option-text">${option.text}</label>
+          `;
+
+          optionElement.addEventListener('click', () => selectAnswer(index, option.value));
+          optionsContainer.appendChild(optionElement);
+        });
+
+        // Reset explanation
+        explanationContainer.classList.add('hidden');
+
+        // Show/hide explanation button
+        if (selectedAnswers[index]) {
+          showExplanationBtn.classList.remove('hidden');
+        } else {
+          showExplanationBtn.classList.add('hidden');
+        }
+
+        // Enable/disable next button
+        nextQuestionBtn.disabled = !selectedAnswers[index];
+
+        // Update next button text
+        if (index < questions.length - 1) {
+          nextQuestionBtn.textContent = 'Pertanyaan Berikutnya';
+        } else {
+          nextQuestionBtn.textContent = 'Lihat Hasil';
+        }
+      }
+
+      function selectAnswer(questionIndex, answerValue) {
+        selectedAnswers[questionIndex] = answerValue;
+
+        // Update UI
+        const options = optionsContainer.querySelectorAll('.option');
+        options.forEach(option => {
+          if (option.dataset.value === answerValue) {
+            option.classList.add('selected');
+          } else {
+            option.classList.remove('selected');
+          }
+        });
+
+        // Show explanation button
+        showExplanationBtn.classList.remove('hidden');
+
+        // Enable next button
+        nextQuestionBtn.disabled = false;
+      }
+
+      function showExplanation() {
+        const question = questions[currentQuestion];
+        explanationText.textContent = question.explanation;
+        explanationContainer.classList.remove('hidden');
+
+        // Mark correct and incorrect options
+        const options = optionsContainer.querySelectorAll('.option');
+        options.forEach(option => {
+          if (option.dataset.value === question.correctAnswer) {
+            option.classList.add('correct');
+          } else if (option.dataset.value === selectedAnswers[currentQuestion]) {
+            option.classList.add('incorrect');
+          }
+        });
+
+        // Hide explanation button
+        showExplanationBtn.classList.add('hidden');
+
+        // Stop timer
+        timerActive = false;
+      }
+
+      function nextQuestion() {
+        if (currentQuestion < questions.length - 1) {
+          loadQuestion(currentQuestion + 1);
+          resetTimer();
+        } else {
+          showResults();
+        }
+      }
+
+      function startTimer() {
+        timeRemaining = 30;
+        timerActive = true;
+        updateTimerDisplay();
+
+        timer = setInterval(() => {
+          if (timerActive) {
+            timeRemaining--;
+            updateTimerDisplay();
+
+            if (timeRemaining <= 0) {
+              clearInterval(timer);
+              nextQuestion();
+            }
+          }
+        }, 1000);
+      }
+
+      function resetTimer() {
+        clearInterval(timer);
+        startTimer();
+      }
+
+      function updateTimerDisplay() {
+        timeLeft.textContent = timeRemaining;
+        timeProgress.style.width = `${(timeRemaining / 30) * 100}%`;
+      }
+
+      function showResults() {
+        // Calculate score
+        score = 0;
+        questions.forEach((question, index) => {
+          if (selectedAnswers[index] === question.correctAnswer) {
+            score++;
+          }
+        });
+
+        // Update UI
+        scoreDisplay.textContent = `${score} / ${questions.length}`;
+        const percentage = (score / questions.length) * 100;
+        scoreBar.style.width = `${percentage}%`;
+
+        // Set feedback
+        if (percentage >= 90) {
+          scoreFeedback.textContent = "Luar Biasa! Anda menguasai sintaks MySQL dengan sangat baik!";
+        } else if (percentage >= 70) {
+          scoreFeedback.textContent = "Bagus! Anda memiliki pemahaman yang kuat tentang MySQL.";
+        } else if (percentage >= 50) {
+          scoreFeedback.textContent = "Cukup baik. Teruslah berlatih untuk meningkatkan pemahaman Anda.";
+        } else {
+          scoreFeedback.textContent = "Terus belajar! Anda akan menguasai MySQL dengan lebih banyak latihan.";
+        }
+
+        // Show confetti for good scores
+        if (percentage >= 70) {
+          createConfetti();
+        }
+
+        // Generate answers summary
+        answersContainer.innerHTML = '';
+        questions.forEach((question, index) => {
+          const isCorrect = selectedAnswers[index] === question.correctAnswer;
+
+          const answerItem = document.createElement('div');
+          answerItem.className = 'answer-item';
+
+          const iconClass = isCorrect ? 'correct' : 'incorrect';
+          const iconSvg = isCorrect
+            ? '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>'
+            : '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
+
+          answerItem.innerHTML = `
+            <div class="answer-icon ${iconClass}">${iconSvg}</div>
+            <div class="answer-details">
+              <p><strong>${index + 1}. ${question.text}</strong></p>
+              ${!isCorrect ? `
+                <p class="answer-wrong">
+                  Jawaban Anda: ${question.options.find(o => o.value === selectedAnswers[index])?.text || 'Tidak dijawab'}<br>
+                  Jawaban Benar: ${question.options.find(o => o.value === question.correctAnswer)?.text}
+                </p>
+              ` : ''}
+            </div>
+          `;
+
+          answersContainer.appendChild(answerItem);
+        });
+
+        // Show results screen
+        quizScreen.classList.add('hidden');
+        resultsScreen.classList.remove('hidden');
+
+        // Stop timer
+        clearInterval(timer);
+      }
+
+      function restartQuiz() {
+        // Reset state
+        currentQuestion = 0;
+        selectedAnswers = {};
+        score = 0;
+
+        // Show quiz screen
+        resultsScreen.classList.add('hidden');
+        quizScreen.classList.remove('hidden');
+
+        // Load first question
+        loadQuestion(0);
+        resetTimer();
+      }
+    });
+
+    // Tambahkan kode untuk dark mode
+    function setupDarkMode() {
+      const themeToggles = [
+        document.getElementById('theme-toggle'),
+        document.getElementById('theme-toggle-learning'),
+        document.getElementById('theme-toggle-quiz'),
+        document.getElementById('theme-toggle-results')
+      ];
+
+      // Check for saved theme preference or use device preference
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const savedTheme = localStorage.getItem('theme');
+
+      // If the user has explicitly chosen a theme, use that
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+      } else if (savedTheme === 'light') {
+        document.body.classList.remove('dark-mode');
+      } else {
+        // Otherwise, use the device preference
+        if (prefersDarkScheme.matches) {
+          document.body.classList.add('dark-mode');
+        }
+      }
+
+      // Add event listeners to all theme toggle buttons
+      themeToggles.forEach(toggle => {
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+
+            // Save the theme preference
+            if (document.body.classList.contains('dark-mode')) {
+              localStorage.setItem('theme', 'dark');
+            } else {
+              localStorage.setItem('theme', 'light');
+            }
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
